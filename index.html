@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Carmen Chraim, stand-up comedian from Lebanon based in Berlin. Shows in English, Arabic, French and German.">
+<meta property="og:title" content="Carmen Chraim, stand-up comedian">
+<meta property="og:description" content="Small but loud. Stand-up in four languages, all over Europe.">
+<style>*,*::before,*::after{box-sizing:border-box}body{margin:0}img{max-width:100%}[hidden]{display:none!important}html{scroll-behavior:smooth}</style>
+<title>Carmen Chraim Comedy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Shrikhand&family=Figtree:wght@400;500;700&family=JetBrains+Mono:wght@500&family=Noto+Sans+Arabic:wght@600&display=swap">
+<style>
+/* Layout: one loud poster-style hero, then a narrow column like a club flyer, with a ticket-stub list for shows */
+:root{
+  --bg:#fbf4f6; --fg:#2b1030; --muted:#6e5470; --line:#e6d3dc;
+  --accent:#c2185b; --gold:#e8a317; --panel:#f3e4ec;
+  --display:"Shrikhand", "Georgia", serif;
+  --body:"Figtree", system-ui, -apple-system, sans-serif;
+  --mono:"JetBrains Mono", ui-monospace, monospace;
+  --arabic:"Noto Sans Arabic", "Geeza Pro", sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1c0b20; --fg:#f7e9f0; --muted:#bfa3c0; --line:#3d2242;
+  --accent:#ff5c9a; --gold:#f5b93a; --panel:#2a1330; color-scheme:dark }}
+:root[data-theme="dark"]{
+  --bg:#1c0b20; --fg:#f7e9f0; --muted:#bfa3c0; --line:#3d2242;
+  --accent:#ff5c9a; --gold:#f5b93a; --panel:#2a1330; color-scheme:dark }
+
+body{background:var(--bg);color:var(--fg);font:400 17px/1.6 var(--body)}
+.wrap{max-width:960px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+a{color:var(--accent);text-underline-offset:3px}
+a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:3px;border-radius:4px}
+
+nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:20px;flex-wrap:wrap}
+.logo{font:400 22px/1 var(--display);color:var(--fg);text-decoration:none}
+nav ul{display:flex;gap:20px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav ul a{color:var(--fg);text-decoration:none;font-weight:500;font-size:15px}
+nav ul a:hover{color:var(--accent)}
+
+.hero .wrap{padding-block:48px 64px;display:grid;gap:24px}
+.eyebrow{font:500 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+h1{font:400 clamp(56px,13vw,150px)/.92 var(--display);margin:0;text-wrap:balance}
+h1 .loud{color:var(--accent);display:block}
+.langs{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
+.langs li{border:2px solid var(--fg);border-radius:999px;padding:4px 14px;font-weight:700;font-size:15px}
+.langs li[lang="ar"]{font-family:var(--arabic)}
+.lede{font-size:20px;max-width:36ch;margin:0}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-block;padding:12px 22px;border-radius:999px;font-weight:700;text-decoration:none;border:2px solid var(--accent)}
+.btn.primary{background:var(--accent);color:var(--bg)}
+.btn.ghost{color:var(--accent)}
+
+section{border-top:2px solid var(--fg)}
+section .wrap{padding-block:56px;display:grid;grid-template-columns:200px 1fr;gap:32px}
+@media (max-width:700px){section .wrap{grid-template-columns:1fr;gap:16px}}
+h2{font:400 34px/1.1 var(--display);margin:0;color:var(--accent)}
+.prose{max-width:62ch;min-width:0}
+.prose p{margin:0 0 1em}
+
+.credits{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;margin-top:28px}
+.credits h3{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 10px}
+.credits ul{list-style:none;margin:0;padding:0;display:grid;gap:4px;font-weight:500}
+
+.shows{list-style:none;margin:0;padding:0;display:grid;gap:14px;min-width:0}
+.ticket{display:grid;grid-template-columns:96px 1fr;background:var(--panel);border-radius:10px;overflow:hidden}
+.stub{border-right:2px dashed var(--line);display:grid;place-content:center;text-align:center;padding:14px 8px;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.stub .d{font-size:30px;line-height:1;color:var(--accent)}
+.stub .m{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-top:4px}
+.info{padding:14px 18px;min-width:0}
+.info strong{display:block;font-size:18px}
+.info span{color:var(--muted);font-size:15px}
+.tag{display:inline-block;margin-top:6px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:4px;background:var(--line);color:var(--muted)}
+.next{margin-top:18px;font-weight:500}
+
+.contact-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px}
+.email{font:500 18px/1.2 var(--mono);user-select:all;word-break:break-all}
+.copy{font:700 14px var(--body);padding:8px 16px;border-radius:999px;border:2px solid var(--fg);background:transparent;color:var(--fg);cursor:pointer}
+.socials{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px;font-weight:700}
+
+footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:2px solid var(--fg)}
+@media (prefers-reduced-motion:no-preference){.btn{transition:transform .15s}.btn:hover{transform:translateY(-2px)}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="logo" href="#top">Carmen Chraim</a>
+  <ul><li><a href="#about">About</a></li><li><a href="#shows">Shows</a></li><li><a href="#contact">Booking</a></li></ul>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <span class="eyebrow">Stand-up comedian · Berlin · from Beirut</span>
+  <h1>Small but <span class="loud">loud.</span></h1>
+  <ul class="langs" aria-label="Performs in">
+    <li lang="en">English</li><li lang="ar" dir="rtl">عربي</li><li lang="fr">Français</li><li lang="de">Deutsch</li>
+  </ul>
+  <p class="lede">High energy, quick stories and a deep love of sarcasm, in four languages and all over Europe.</p>
+  <div class="cta">
+    <a class="btn primary" href="https://www.instagram.com/carmenita01/" target="_blank" rel="noopener">See where I'm playing next</a>
+    <a class="btn ghost" href="#contact">Book me</a>
+  </div>
+</div></header>
+
+<section id="about"><div class="wrap">
+  <h2>About</h2>
+  <div class="prose">
+    <p>Born and raised in Lebanon, Carmen started doing stand-up in Berlin back when the city had exactly one open mic. She helped build the scene from there, producing shows like Comedy Auf Deuglish, Teepeeland Stands Up and Stand Up Saturdays, and co-hosting Monday Night Mics, one of Berlin's longest-running weekly shows.</p>
+    <p>She's performed on Comedy Central Germany, played the house team at Comedy Café Berlin, toured her one-hour solo show, and founded SUFTL, Hamburg's feminist comedy stage. Today she performs with the Queen Bees Comedy collective.</p>
+    <p>On stage she works the room hard. Every look at the audience pulls another thread, until the whole crowd is caught in one very tight web.</p>
+    <div class="credits">
+      <div><h3>Opened for</h3><ul><li>Todd Barry</li><li>Judah Friedlander</li><li>Andy Haynes</li><li>Lisa Curry</li></ul></div>
+      <div><h3>Seen on</h3><ul><li>Comedy Central Germany</li><li>Comedy Café Berlin</li><li>Queen Bees Comedy</li></ul></div>
+      <div><h3>Shows produced</h3><ul><li>Comedy Auf Deuglish</li><li>Teepeeland Stands Up</li><li>Stand Up Saturdays</li><li>Monday Night Mics</li><li>SUFTL, Hamburg</li></ul></div>
+    </div>
+  </div>
+</div></section>
+
+<section id="shows"><div class="wrap">
+  <h2>Shows</h2>
+  <div style="min-width:0">
+    <ul class="shows">
+      <li class="ticket"><div class="stub"><div class="d">09</div><div class="m">Oct 26</div></div>
+        <div class="info"><strong>Die Bäckerei Comedy Nights</strong><span>Special guest · Die Bäckerei, Innsbruck</span><br><span class="tag">Past show</span></div></li>
+      <li class="ticket"><div class="stub"><div class="d">31</div><div class="m">Jul 26</div></div>
+        <div class="info"><strong>Culturally Inappropriate</strong><span>With Sasha Nezlobin, Dinara Kerey, Dima Watermelon · Art.City.People, Berlin Mitte</span><br><span class="tag">Past show</span></div></li>
+    </ul>
+    <p class="next">New dates go up on <a href="https://www.instagram.com/carmenita01/" target="_blank" rel="noopener">Instagram @carmenita01</a> first.</p>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap">
+  <h2>Booking</h2>
+  <div class="prose">
+    <p>For club spots, corporate gigs, festivals and hosting in English, Arabic, French or German, get in touch:</p>
+    <div class="contact-row">
+      <span class="email" id="email">carmenchraim@gmail.com</span>
+      <button class="copy" id="copyBtn" type="button">Copy email</button>
+    </div>
+    <div class="socials">
+      <a href="https://www.instagram.com/carmenita01/" target="_blank" rel="noopener">Instagram</a>
+    </div>
+  </div>
+</div></section>
+
+<footer><div class="wrap"><span>© 2026 Carmen Chraim</span><span>Berlin</span></div></footer>
+
+<script>
+document.getElementById('copyBtn').addEventListener('click', async e => {
+  const btn = e.currentTarget, text = document.getElementById('email').textContent;
+  try { await navigator.clipboard.writeText(text); btn.textContent = 'Copied'; }
+  catch { const r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected, press copy'; }
+  setTimeout(() => btn.textContent = 'Copy email', 2000);
+});
+</script>
+</body>
+</html>

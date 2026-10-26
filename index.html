@@ -70,6 +70,13 @@ h2{font:400 34px/1.1 var(--display);margin:0;color:var(--accent)}
 .info{padding:14px 18px;min-width:0}
 .info strong{display:block;font-size:18px}
 .info span{color:var(--muted);font-size:15px}
+.info{display:grid;grid-template-columns:1fr auto;gap:4px 16px;align-items:center}
+.info > div{min-width:0}
+.tix{font-weight:700;font-size:15px;white-space:nowrap;padding:8px 14px;border:2px solid var(--accent);border-radius:999px;text-decoration:none}
+.tix:hover{background:var(--accent);color:var(--bg)}
+@media (max-width:520px){.info{grid-template-columns:1fr}.tix{justify-self:start}}
+.later{margin-top:28px}
+.later h3{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
 .tag{display:inline-block;margin-top:6px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:4px;background:var(--line);color:var(--muted)}
 .next{margin-top:18px;font-weight:500}
 
@@ -96,7 +103,7 @@ footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;j
   </ul>
   <p class="lede">High energy, quick stories and a deep love of sarcasm, in four languages and all over Europe.</p>
   <div class="cta">
-    <a class="btn primary" href="https://www.instagram.com/carmenita01/" target="_blank" rel="noopener">See where I'm playing next</a>
+    <a class="btn primary" href="#shows">See where I'm playing next</a>
     <a class="btn ghost" href="#contact">Book me</a>
   </div>
 </div></header>
@@ -119,12 +126,29 @@ footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;j
   <h2>Shows</h2>
   <div style="min-width:0">
     <ul class="shows">
-      <li class="ticket"><div class="stub"><div class="d">09</div><div class="m">Oct 26</div></div>
-        <div class="info"><strong>Die Bäckerei Comedy Nights</strong><span>Special guest · Die Bäckerei, Innsbruck</span><br><span class="tag">Past show</span></div></li>
-      <li class="ticket"><div class="stub"><div class="d">31</div><div class="m">Jul 26</div></div>
-        <div class="info"><strong>Culturally Inappropriate</strong><span>With Sasha Nezlobin, Dinara Kerey, Dima Watermelon · Art.City.People, Berlin Mitte</span><br><span class="tag">Past show</span></div></li>
+      <li class="ticket"><div class="stub"><div class="d">27</div><div class="m">Tue · Oct</div></div>
+        <div class="info"><div><strong>Baguette Comedy Club</strong><span>Berlin Neukölln</span><br><span class="tag">In French</span></div><a class="tix" href="https://www.eventbrite.de/e/billets-baguette-comedy-club-mardi-2002752901842" target="_blank" rel="noopener">Tickets</a></div></li>
+      <li class="ticket"><div class="stub"><div class="d">28</div><div class="m">Wed · Oct</div></div>
+        <div class="info"><div><strong>Dirty Laundry Stand Up</strong><span>With Tyrone Stallone · Berlin Schöneberg</span><br><span class="tag">In English</span></div><a class="tix" href="https://www.eventbrite.ca/e/dirty-laundry-stand-up-and-air-out-in-english-wtyrone-stallone-tickets-2003089854677" target="_blank" rel="noopener">Tickets</a></div></li>
+      <li class="ticket"><div class="stub"><div class="d">29</div><div class="m">Thu · Oct</div></div>
+        <div class="info"><div><strong>On Fire! Scorching Stand Up Comedy</strong><span>Berlin Friedrichshain</span></div><a class="tix" href="https://www.eventbrite.ca/e/on-fire-scorching-stand-up-comedy-tickets-1993211339773" target="_blank" rel="noopener">Tickets</a></div></li>
+      <li class="ticket"><div class="stub"><div class="d">30</div><div class="m">Fri · Oct</div></div>
+        <div class="info"><div><strong>Comedy Therapy</strong><span>Problems solved by comedians · Berlin Friedrichshain</span></div><a class="tix" href="https://www.eventbrite.ie/e/comedy-therapy-problems-solved-by-comedians-tickets-1998475291394" target="_blank" rel="noopener">Tickets</a></div></li>
+      <li class="ticket"><div class="stub"><div class="d">31</div><div class="m">Sat · Oct</div></div>
+        <div class="info"><div><strong>Comedy Therapy Express</strong><span>Problems solved by comedians · Berlin Friedrichshain</span></div><a class="tix" href="https://www.eventbrite.ie/e/comedy-therapy-express-problems-solved-by-comedians-tickets-2003509948188" target="_blank" rel="noopener">Tickets</a></div></li>
+      <li class="ticket"><div class="stub"><div class="d">01</div><div class="m">Sun · Nov</div></div>
+        <div class="info"><div><strong>Sunday Comedy Party</strong><span>Berlin Neukölln</span><br><span class="tag">In English</span></div><a class="tix" href="https://www.eventbrite.de/e/english-stand-up-sunday-comedy-party-011126-tickets-2003703223279" target="_blank" rel="noopener">Tickets</a></div></li>
     </ul>
-    <p class="next">New dates go up on <a href="https://www.instagram.com/carmenita01/" target="_blank" rel="noopener">Instagram @carmenita01</a> first.</p>
+    <div class="later">
+      <h3>Coming up in 2027</h3>
+      <ul class="shows">
+        <li class="ticket"><div class="stub"><div class="d">24</div><div class="m">Jan</div></div>
+          <div class="info"><div><strong>Accidentally German</strong><span>Double bill with Drew Portnoy</span></div></div></li>
+        <li class="ticket"><div class="stub"><div class="d">17</div><div class="m">Feb</div></div>
+          <div class="info"><div><strong>Solo Show</strong><span>Brno</span></div></div></li>
+      </ul>
+    </div>
+    <p class="next">All dates and tickets are also on <a href="https://linktr.ee/carmenchraim" target="_blank" rel="noopener">my Linktree</a>, updated every week.</p>
   </div>
 </div></section>
 
@@ -138,6 +162,7 @@ footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;j
     </div>
     <div class="socials">
       <a href="https://www.instagram.com/carmenita01/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://linktr.ee/carmenchraim" target="_blank" rel="noopener">Linktree</a>
     </div>
   </div>
 </div></section>

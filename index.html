@@ -80,9 +80,21 @@ h2{font:400 34px/1.1 var(--display);margin:0;color:var(--accent)}
 .tag{display:inline-block;margin-top:6px;font:500 11px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;padding:4px 8px;border-radius:4px;background:var(--line);color:var(--muted)}
 .next{margin-top:18px;font-weight:500}
 
-.contact-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px}
-.email{font:500 18px/1.2 var(--mono);user-select:all;word-break:break-all}
-.copy{font:700 14px var(--body);padding:8px 16px;border-radius:999px;border:2px solid var(--fg);background:transparent;color:var(--fg);cursor:pointer}
+.book{display:grid;grid-template-columns:1fr 1fr;gap:16px;background:var(--panel);border-radius:12px;padding:24px;margin-top:8px}
+@media (max-width:560px){.book{grid-template-columns:1fr;padding:18px}}
+.field{display:grid;gap:6px;min-width:0}
+.field.full{grid-column:1/-1}
+.field label{font:500 12px/1 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.field input,.field select,.field textarea{font:400 16px/1.4 var(--body);color:var(--fg);background:var(--bg);border:2px solid var(--line);border-radius:8px;padding:10px 12px;width:100%}
+.field textarea{min-height:130px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent)}
+.hp{position:absolute;left:-9999px}
+.send{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:14px;align-items:center}
+.send button{font:700 16px var(--body);padding:12px 26px;border-radius:999px;border:2px solid var(--accent);background:var(--accent);color:var(--bg);cursor:pointer}
+.send button:disabled{opacity:.6;cursor:wait}
+.status{font-weight:500;font-size:15px}
+.status.ok{color:var(--fg)}
+.status.err{color:var(--accent)}
 .socials{display:flex;gap:18px;flex-wrap:wrap;margin-top:20px;font-weight:700}
 
 footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:2px solid var(--fg)}
@@ -148,10 +160,18 @@ footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;j
   <h2>Booking</h2>
   <div class="prose">
     <p>For club spots, corporate gigs, festivals and hosting, mainly in English, get in touch:</p>
-    <div class="contact-row">
-      <span class="email" id="email">carmenchraim@gmail.com</span>
-      <button class="copy" id="copyBtn" type="button">Copy email</button>
-    </div>
+    <form class="book" id="bookForm" novalidate>
+      <input type="hidden" name="access_key" value="YOUR_WEB3FORMS_KEY">
+      <input type="hidden" name="subject" value="New booking request from carmenchraim.com">
+      <input type="hidden" name="from_name" value="carmenchraim.com">
+      <input type="checkbox" name="botcheck" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" autocomplete="name" required></div>
+      <div class="field"><label for="f-email">Your email</label><input id="f-email" name="email" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="f-type">What's it for</label><select id="f-type" name="booking_type"><option>Club spot</option><option>Corporate gig</option><option>Festival</option><option>Hosting</option><option>Something else</option></select></div>
+      <div class="field"><label for="f-date">Date (if you have one)</label><input id="f-date" name="event_date" placeholder="e.g. 14 March, Berlin"></div>
+      <div class="field full"><label for="f-msg">Tell me about it</label><textarea id="f-msg" name="message" placeholder="Venue, city, audience size, set length, budget" required></textarea></div>
+      <div class="send"><button type="submit" id="f-send">Send request</button><span class="status" id="f-status" role="status"></span></div>
+    </form>
     <div class="socials">
       <a href="https://www.instagram.com/carmenita01/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://linktr.ee/carmenchraim" target="_blank" rel="noopener">Linktree</a>
@@ -162,12 +182,32 @@ footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;j
 <footer><div class="wrap"><span>© 2026 Carmen Chraim</span><span>Berlin</span></div></footer>
 
 <script>
-document.getElementById('copyBtn').addEventListener('click', async e => {
-  const btn = e.currentTarget, text = document.getElementById('email').textContent;
-  try { await navigator.clipboard.writeText(text); btn.textContent = 'Copied'; }
-  catch { const r = document.createRange(); r.selectNodeContents(document.getElementById('email'));
-    const s = getSelection(); s.removeAllRanges(); s.addRange(r); btn.textContent = 'Selected, press copy'; }
-  setTimeout(() => btn.textContent = 'Copy email', 2000);
+const form = document.getElementById('bookForm');
+const statusEl = document.getElementById('f-status');
+const sendBtn = document.getElementById('f-send');
+form.addEventListener('submit', async e => {
+  e.preventDefault();
+  statusEl.className = 'status';
+  const name = form.name.value.trim(), email = form.email.value.trim(), msg = form.message.value.trim();
+  if (!name || !msg || !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(email)) {
+    statusEl.textContent = 'Please add your name, a valid email and a short message.';
+    statusEl.classList.add('err'); return;
+  }
+  sendBtn.disabled = true; statusEl.textContent = 'Sending…';
+  try {
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST', headers: {'Content-Type': 'application/json', Accept: 'application/json'},
+      body: JSON.stringify(Object.fromEntries(new FormData(form)))
+    });
+    const data = await res.json();
+    if (!data.success) throw new Error(data.message);
+    form.reset();
+    statusEl.textContent = 'Thanks! Your request is on its way. Carmen will get back to you soon.';
+    statusEl.classList.add('ok');
+  } catch {
+    statusEl.textContent = 'That didn’t send. Please try again, or message @carmenita01 on Instagram.';
+    statusEl.classList.add('err');
+  } finally { sendBtn.disabled = false; }
 });
 </script>
 </body>

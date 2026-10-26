@@ -51,7 +51,7 @@ h1 .loud{color:var(--accent);display:block}
 .stage{margin:16px 0 0;border-radius:14px;overflow:hidden;background:#0d0610;aspect-ratio:3/2;max-width:100%}
 .stage img{width:100%;height:100%;object-fit:cover;object-position:62% 50%;display:block}
 @media (max-width:600px){.stage{aspect-ratio:4/5}}
-.gallery{display:grid;grid-template-columns:2fr 3fr;grid-auto-rows:clamp(300px,42vw,440px);gap:14px;min-width:0}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:clamp(300px,40vw,420px);gap:14px;min-width:0}
 .gallery button{padding:0;border:0;border-radius:12px;overflow:hidden;cursor:zoom-in;background:var(--panel);display:block;width:100%;height:100%}
 .gallery img{width:100%;height:100%;object-fit:cover;display:block}
 @media (prefers-reduced-motion:no-preference){.gallery img{transition:transform .3s}.gallery button:hover img{transform:scale(1.03)}}
@@ -174,7 +174,8 @@ footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;j
   <h2>Photos</h2>
   <div class="gallery">
     <button type="button" aria-label="Enlarge portrait photo"><img src="images/carmen-portrait.jpg" alt="Portrait of Carmen Chraim in a leopard-print jacket, leaning toward the camera with a raised eyebrow" style="object-position:50% 30%" loading="lazy"></button>
-    <button type="button" aria-label="Enlarge club photo"><img src="images/carmen-club.jpg" alt="Carmen Chraim on stage in a comedy club, holding a microphone and raising her arm in front of a red graffiti wall" style="object-position:30% 40%" loading="lazy"></button>
+    <button type="button" aria-label="Enlarge club photo"><img src="images/carmen-club.jpg" alt="Carmen Chraim on stage in a comedy club, holding a microphone and raising her arm in front of a red graffiti wall" style="object-position:24% 40%" loading="lazy"></button>
+    <button type="button" aria-label="Enlarge dancing photo"><img src="images/carmen-dance.jpg" alt="Carmen Chraim smiling and dancing barefoot in socks, arms out, in a white tank top and black trousers" style="object-position:35% 45%" loading="lazy"></button>
   </div>
 </div></section>
 

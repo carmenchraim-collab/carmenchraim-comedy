@@ -41,8 +41,9 @@ nav ul a:hover{color:var(--accent)}
 
 .hero .wrap{padding-block:48px 64px;display:grid;gap:24px}
 .eyebrow{font:500 13px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-h1{font:400 clamp(56px,13vw,150px)/.92 var(--display);margin:0;text-wrap:balance}
-h1 .loud{color:var(--accent);display:block}
+h1{font:400 clamp(44px,8.5vw,96px)/1 var(--display);margin:0;text-wrap:balance;max-width:14ch}
+h1 .loud{color:var(--accent)}
+.sub{font:400 clamp(24px,3.6vw,36px)/1.1 var(--display);margin:0;color:var(--accent)}
 .langs{display:flex;flex-wrap:wrap;gap:10px;margin:0;padding:0;list-style:none}
 .langs li{border:2px solid var(--fg);border-radius:999px;padding:4px 14px;font-weight:700;font-size:15px}
 .langs li[lang="ar"]{font-family:var(--arabic)}
@@ -126,8 +127,8 @@ footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;j
 </div></nav>
 
 <header class="hero" id="top"><div class="wrap">
-  <span class="eyebrow">Lebanese stand-up comedian based in Berlin</span>
-  <h1>Petite but <span class="loud">loud.</span></h1>
+  <h1><span class="loud">Lebanese</span> stand-up comedian based in Berlin</h1>
+  <p class="sub">Petite but loud.</p>
   <p class="lede">High energy, quick stories and a deep love of sarcasm, mainly in Berlin. But if Deutsche Bahn comes on time, she will travel across Europe.</p>
   <div class="cta">
     <a class="btn primary" href="#shows">See where I'm playing next</a>

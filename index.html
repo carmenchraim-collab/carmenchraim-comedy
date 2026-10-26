@@ -51,11 +51,16 @@ h1 .loud{color:var(--accent);display:block}
 .stage{margin:16px 0 0;border-radius:14px;overflow:hidden;background:#0d0610;aspect-ratio:3/2;max-width:100%}
 .stage img{width:100%;height:100%;object-fit:cover;object-position:62% 50%;display:block}
 @media (max-width:600px){.stage{aspect-ratio:4/5}}
-.gallery{display:grid;grid-template-columns:repeat(3,1fr);grid-auto-rows:clamp(300px,40vw,420px);gap:14px;min-width:0}
-.gallery button{padding:0;border:0;border-radius:12px;overflow:hidden;cursor:zoom-in;background:var(--panel);display:block;width:100%;height:100%}
+.gal-wrap{min-width:0;display:grid;gap:12px}
+.gallery{display:flex;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding-bottom:10px;scrollbar-width:thin;scrollbar-color:var(--accent) var(--line);overscroll-behavior-x:contain}
+.gallery button{flex:0 0 clamp(240px,30vw,300px);aspect-ratio:2/3;scroll-snap-align:start;padding:0;border:0;border-radius:12px;overflow:hidden;cursor:zoom-in;background:var(--panel);display:block}
 .gallery img{width:100%;height:100%;object-fit:cover;display:block}
 @media (prefers-reduced-motion:no-preference){.gallery img{transition:transform .3s}.gallery button:hover img{transform:scale(1.03)}}
-@media (max-width:600px){.gallery{grid-template-columns:1fr;grid-auto-rows:auto}.gallery button{aspect-ratio:4/5}}
+@media (max-width:600px){.gallery button{flex-basis:78%}}
+.gal-nav{display:flex;gap:10px;justify-content:flex-end}
+.gal-nav button{font:700 18px/1 var(--body);width:44px;height:44px;border-radius:999px;border:2px solid var(--fg);background:transparent;color:var(--fg);cursor:pointer}
+.gal-nav button:hover{background:var(--fg);color:var(--bg)}
+.gal-nav button:disabled{opacity:.3;cursor:default;background:transparent;color:var(--fg)}
 dialog.lb{border:0;padding:0;background:transparent;max-width:min(92vw,1200px);max-height:92vh}
 dialog.lb::backdrop{background:rgba(10,4,12,.88)}
 dialog.lb img{max-width:100%;max-height:88vh;display:block;border-radius:8px}
@@ -172,10 +177,13 @@ footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;j
 
 <section id="photos"><div class="wrap">
   <h2>Photos</h2>
-  <div class="gallery">
+  <div class="gal-wrap">
+  <div class="gallery" id="gallery">
     <button type="button" aria-label="Enlarge portrait photo"><img src="images/carmen-portrait.jpg" alt="Portrait of Carmen Chraim in a leopard-print jacket, leaning toward the camera with a raised eyebrow" style="object-position:50% 30%" loading="lazy"></button>
     <button type="button" aria-label="Enlarge club photo"><img src="images/carmen-club.jpg" alt="Carmen Chraim on stage in a comedy club, holding a microphone and raising her arm in front of a red graffiti wall" style="object-position:24% 40%" loading="lazy"></button>
     <button type="button" aria-label="Enlarge dancing photo"><img src="images/carmen-dance.jpg" alt="Carmen Chraim smiling and dancing barefoot in socks, arms out, in a white tank top and black trousers" style="object-position:35% 45%" loading="lazy"></button>
+  </div>
+  <div class="gal-nav"><button type="button" id="gal-prev" aria-label="Previous photos">&larr;</button><button type="button" id="gal-next" aria-label="More photos">&rarr;</button></div>
   </div>
 </div></section>
 
@@ -207,6 +215,12 @@ footer .wrap{padding-block:32px;color:var(--muted);font-size:14px;display:flex;j
 <footer><div class="wrap"><span>© 2026 Carmen Chraim</span><span>Berlin</span></div></footer>
 
 <script>
+const gal = document.getElementById('gallery'), gp = document.getElementById('gal-prev'), gn = document.getElementById('gal-next');
+const galStep = () => (gal.querySelector('button')?.offsetWidth || 300) + 14;
+gp.addEventListener('click', () => gal.scrollBy({left: -galStep()}));
+gn.addEventListener('click', () => gal.scrollBy({left: galStep()}));
+const galUpdate = () => { gp.disabled = gal.scrollLeft < 4; gn.disabled = gal.scrollLeft + gal.clientWidth >= gal.scrollWidth - 4; };
+gal.addEventListener('scroll', galUpdate, {passive: true}); addEventListener('resize', galUpdate); galUpdate();
 const lb = document.getElementById('lightbox'), lbImg = document.getElementById('lb-img');
 document.querySelectorAll('.gallery button').forEach(b => b.addEventListener('click', () => {
   const img = b.querySelector('img'); lbImg.src = img.src; lbImg.alt = img.alt;
